@@ -14,7 +14,7 @@ public class FileListRenderer implements ListCellRenderer{
         label.setOpaque(true); //macht den hintergrund nicht durchichtig
         if(o instanceof Datei){
             Datei item = (Datei)o;
-            label.setForeground(item.getColor());
+            
         }
         label.setBackground(isSelected ? Color.lightGray:Color.white);
         
