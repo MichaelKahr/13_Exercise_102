@@ -15,10 +15,8 @@ public class FileListRenderer implements ListCellRenderer{
             Datei item = (Datei)o;
             if(item.isDirectory()){
                 label.setForeground(Color.red);
-                label.setBackground(Color.darkGray);
             }else{
                 label.setForeground(Color.blue);
-                label.setBackground(Color.lightGray);
             }
             
         }

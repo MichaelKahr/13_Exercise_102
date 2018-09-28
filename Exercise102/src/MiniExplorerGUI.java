@@ -1,5 +1,8 @@
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class MiniExplorerGUI extends javax.swing.JFrame {
 
@@ -14,7 +17,7 @@ public class MiniExplorerGUI extends javax.swing.JFrame {
         bl.add(new Datei(dir.getAbsolutePath() + "/.."));
         for (File f : dir.listFiles()) {
             bl.add(new Datei(f.getAbsolutePath()));
-            System.out.println(f.getAbsolutePath());
+            //System.out.println(f.getAbsolutePath());
         }
     }
 
@@ -65,24 +68,27 @@ public class MiniExplorerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void liOutValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liOutValueChanged
-        
+
     }//GEN-LAST:event_liOutValueChanged
 
     private void liOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liOutMouseClicked
         if (evt.getClickCount() == 2) {
             if (liOut.getSelectedValue().getName().equalsIgnoreCase("..")) {
-               addThings(new File(dir.getParent()));
-            }else if(liOut.getSelectedValue().isDirectory()){
-                File t = new File(dir+"/"+liOut.getSelectedValue().getName());
+                addThings(new File(dir.getParent()));
+            } else if (liOut.getSelectedValue().isDirectory()) {
+                File t = new File(dir + "/" + liOut.getSelectedValue().getName());
                 addThings(t);
+            } else{
+                Desktop desktop = Desktop.getDesktop();
+                System.out.println("is a file");
+                File fi = new File(dir+"/"+liOut.getSelectedValue().getName());
+                try {
+                    desktop.open(fi);
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "File could not be opened");
+                }
             }
-            
-            
-            
-            
-            
-            
-            
+
         }
     }//GEN-LAST:event_liOutMouseClicked
     public static void main(String args[]) {

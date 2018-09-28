@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.util.Collections;
 import java.util.LinkedList;
 import javax.swing.AbstractListModel;
 
@@ -9,7 +10,9 @@ public class FileModell extends AbstractListModel{
     
     public void add(Datei d){
         files.add(d);
+        
         fireIntervalAdded(this, files.size()-1, files.size()-1);
+        sort();
     }
     
     @Override
@@ -19,7 +22,6 @@ public class FileModell extends AbstractListModel{
 
     public void listFiles(){
         File[] files = new File("/Users/mikeykahr/Desktop/Privat/SCHULE/POS/3.Klasse/Exercises/Exercise102/Exercise102r").listFiles();
-        // this.add(new Datei("..."));
         for (File file : files){
             this.add(new Datei(file.getAbsolutePath()));
         }
@@ -32,6 +34,11 @@ public class FileModell extends AbstractListModel{
     
     public void clearList(){
         files.clear();
+        fireContentsChanged(this, 0, files.size()-1);
+    }
+    
+    public void sort(){
+        Collections.sort(files, new FileComparer());
         fireContentsChanged(this, 0, files.size()-1);
     }
 
